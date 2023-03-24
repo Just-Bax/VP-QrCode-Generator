@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_03242023231502.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
+ <RULES_ITEM>
+  <IS_ASYNC>0</IS_ASYNC>
+  <IS_ENABLED>1</IS_ENABLED>
+  <RULE>Qr-Code generator</RULE>
+  <RULE_CLASS_ID>6</RULE_CLASS_ID>
+  <RULE_ID>100006624</RULE_ID>
+  <RULE_TYPE>
+   <RULE_TYPE_ID>18</RULE_TYPE_ID>
+   <RULE_TYPE>After Trackor Create</RULE_TYPE>
+   <ID_FIELD>XITOR_ID</ID_FIELD>
+   <TEMPLATE_SQL>select xitor_type_id as &quot;Xitor Type ID&quot;,
+       xitor_type as &quot;Xitor Type&quot;,
+       xitor_type_id as &quot;Xitor Type Id&quot;
+from xitor_type</TEMPLATE_SQL>
+   <TYPE_LABELS>
+    <T_LABEL>
+     <APP_LANG_ID>0</APP_LANG_ID>
+     <APP_LABEL_ID>6420</APP_LABEL_ID>
+     <LABEL_TEXT>Trackor Created (After)</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>1</APP_LANG_ID>
+     <APP_LABEL_ID>6420</APP_LABEL_ID>
+     <LABEL_TEXT>Trackor Created (After)</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>2</APP_LANG_ID>
+     <APP_LABEL_ID>6420</APP_LABEL_ID>
+     <LABEL_TEXT>Trackor Created (After)</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>3</APP_LANG_ID>
+     <APP_LABEL_ID>6420</APP_LABEL_ID>
+     <LABEL_TEXT>Trackor Created (After)</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>5</APP_LANG_ID>
+     <APP_LABEL_ID>6420</APP_LABEL_ID>
+     <LABEL_TEXT>Trackor Created (After)</LABEL_TEXT>
+    </T_LABEL>
+   </TYPE_LABELS>
+   <DESC_LABELS>
+    <T_LABEL>
+     <APP_LANG_ID>0</APP_LANG_ID>
+     <APP_LABEL_ID>6449</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when a new Trackor is created.</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>1</APP_LANG_ID>
+     <APP_LABEL_ID>6449</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when a new Trackor is created.</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>2</APP_LANG_ID>
+     <APP_LABEL_ID>6449</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when a new Trackor is created.</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>3</APP_LANG_ID>
+     <APP_LABEL_ID>6449</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when a new Trackor is created.</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>5</APP_LANG_ID>
+     <APP_LABEL_ID>6449</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when a new Trackor is created.</LABEL_TEXT>
+    </T_LABEL>
+   </DESC_LABELS>
+  </RULE_TYPE>
+  <WARNING_LABEL/>
+  <RULE_CLASS_PARAM_VALS/>
+  <RULE_HTTPCALLS>
+   <T_RULE_HTTPCALL>
+    <AUTH_TYPE>1</AUTH_TYPE>
+    <CALLBACK_PROCEDURE>PKG_GENERATOR.qrcode_callback</CALLBACK_PROCEDURE>
+    <CUSTOM_HEADERS>Content-Type: application/json</CUSTOM_HEADERS>
+    <DATA_SQL>select &apos;{&quot;data&quot;: &quot;https://cloud-erp.onevizion.com/form/ConfigAppForm.do?id=&apos; || to_char(:xitor_id) || &apos;&amp;ttid=&apos; || to_char(PKG_GENERATOR.get_ttid(:xitor_id)) || &apos;&quot; , &quot;config&quot;: {&quot;bodyColor&quot;: &quot;#152B42&quot;, &quot;bgColor&quot;: &quot;#FFFFFF&quot;, &quot;eye1Color&quot;: &quot;#152B42&quot;, &quot;eye2Color&quot;: &quot;#152B42&quot;, &quot;eye3Color&quot;: &quot;#152B42&quot;, &quot;eyeBall1Color&quot;: &quot;#152B42&quot;, &quot;eyeBall2Color&quot;: &quot;#152B42&quot;, &quot;eyeBall3Color&quot;: &quot;#152B42&quot;, &quot;gradientColor1&quot;: &quot;#152B42&quot;, &quot;gradientColor2&quot;: &quot;#152B42&quot;}, &quot;size&quot;: 300, &quot;download&quot;: false, &quot;file&quot;: &quot;png&quot;}&apos; from dual</DATA_SQL>
+    <MULTIPART_HEADERS>Content-Disposition: form-data; name=&quot;json_data&quot;; filename=&quot;filename.json&quot;
+Content-Type: application/json</MULTIPART_HEADERS>
+    <HTTP_METHOD_ID>2</HTTP_METHOD_ID>
+    <IS_BLOB_RESPONSE>1</IS_BLOB_RESPONSE>
+    <IS_MULTIPART_FORM_DATA_REQ>0</IS_MULTIPART_FORM_DATA_REQ>
+    <PROGRAM_ID>1</PROGRAM_ID>
+    <REQUEST_BODY_FORMAT>4</REQUEST_BODY_FORMAT>
+    <RULE_HTTP_CALL_ID>101243</RULE_HTTP_CALL_ID>
+    <RULE_ID>100006624</RULE_ID>
+    <URL_STR>https://api.qrcode-monkey.com/qr/custom</URL_STR>
+    <CONNECTION_TIMEOUT>30</CONNECTION_TIMEOUT>
+    <READ_TIMEOUT>30</READ_TIMEOUT>
+    <EXECUTION_ATTEMPTS>1</EXECUTION_ATTEMPTS>
+   </T_RULE_HTTPCALL>
+  </RULE_HTTPCALLS>
+  <RULE_HTTPCALL_PARAMS/>
+  <BPD_ITEMS>
+   <T_BPD_ITEM>
+    <ITEM_ID>10000616436</ITEM_ID>
+    <PKEY>100006624</PKEY>
+    <ITEM_TYPE_ID>9</ITEM_TYPE_ID>
+    <ITEM_STATUS_ID>1</ITEM_STATUS_ID>
+    <BLOB_DATA/>
+    <PROGRAM_ID>1</PROGRAM_ID>
+    <NAME>Qr-Code generator</NAME>
+    <APP_LABEL/>
+   </T_BPD_ITEM>
+  </BPD_ITEMS>
+  <RULE_GEOCODING/>
+  <RULE_MAP_SNIPPETS/>
+  <PROGRAM_ID>1</PROGRAM_ID>
+  <RULE_TYPE_ID>18</RULE_TYPE_ID>
+  <RULE_TOWER_GROUPS/>
+  <COMPONENT_PACKAGES/>
+  <CONFIG_FIELD_IDNUMS/>
+  <TASK_DATE_IDNUMS/>
+  <TASK_IDNUMS/>
+  <TRACKOR_TYPE_IDNUMS>
+   <VARCHAR2>PATIENT</VARCHAR2>
+   <VARCHAR2>PRESCRIPTION</VARCHAR2>
+   <VARCHAR2>STAFF</VARCHAR2>
+  </TRACKOR_TYPE_IDNUMS>
+  <RELATION_TYPE_IDNUMS/>
+  <WP_TEMPLATE_IDNUMS/>
+  <WF_TEMPLATE_IDNUMS/>
+  <IMPORT_IDNUMS/>
+  <REPORT_IDNUMS/>
+  <COMPONENT_LABELS/>
+ </RULES_ITEM>
+</RULES>
+</COMPONENTS>
