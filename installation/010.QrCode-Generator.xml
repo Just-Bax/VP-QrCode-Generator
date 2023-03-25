@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_03242023231502.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
+<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_03242023141746.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
  <RULES_ITEM>
   <IS_ASYNC>0</IS_ASYNC>
   <IS_ENABLED>1</IS_ENABLED>
@@ -112,5 +112,83 @@ Content-Type: application/json</MULTIPART_HEADERS>
   <COMPONENT_PACKAGES/>
   <COMPONENT_LABELS/>
  </RULES_ITEM>
-</RULES>
+</RULES><DB_PACKAGES>
+ <DB_PACKAGES_ITEM>
+  <DB_PKG_NAME>PKG_GENERATOR</DB_PKG_NAME>
+  <PKG_NAME>PKG_GENERATOR</PKG_NAME>
+  <DB_PACKAGE_SPEC>CREATE OR REPLACE EDITIONABLE PACKAGE &quot;PKG_GENERATOR&quot; 
+as
+
+    function get_ttid(p_tid in number)
+        return number;
+    
+    procedure qrcode_callback(
+        p_http_status in number,
+        p_response in varchar2,
+        p_tid in number,
+        p_http_call_log_id in rule_http_call_log.rule_http_call_log_id%type,
+        p_id2 in number);
+
+end pkg_generator;</DB_PACKAGE_SPEC>
+  <DB_PACKAGE_BODY>CREATE OR REPLACE EDITIONABLE PACKAGE BODY &quot;PKG_GENERATOR&quot; 
+as
+
+    function get_ttid(p_tid in number)
+        return number
+    as
+        ttid number;
+    begin
+        select xitor_type_id
+        into ttid
+        from xitor 
+        where xitor_id = p_tid;
+        
+        return ttid;
+    end;
+    
+    procedure qrcode_callback(
+        p_http_status in number,
+        p_response in varchar2,
+        p_tid in number,
+        p_http_call_log_id in rule_http_call_log.rule_http_call_log_id%type,
+        p_id2 in number)
+    as
+        ttid number;
+        qrid number;
+        blob_id number;
+    begin
+        ttid := get_ttid(p_tid);
+        
+        select config_field_id
+        into qrid
+        from config_field 
+        where xitor_type_id = ttid and config_field_name like &apos;%_QRCODE&apos;;
+        
+        -- if ttid = 100006865 then -- Trackor_type_id of Prescription
+        --     qrid := 1000063381; -- QrCode field
+        -- end if;
+        
+        -- if ttid = 100006823 then -- Trackor_type_id of Patient
+        --     qrid := 1000063082; -- QrCode field
+        -- end if;
+        
+        -- if ttid = 100006883 then -- Trackor_type_id of Staff
+        --     qrid := 1000063101; -- QrCode field
+        -- end if;
+                
+        insert into blob_data(blob_data, thumbnail, config_field_id, filename, key_value)
+        values (p_response, p_response, qrid, &apos;Qr-Code.jpg&apos;, p_tid)
+        returning blob_data_id INTO blob_id;
+        commit;
+        util.setvalnumbyid(p_tid, qrid, blob_id);
+    end;
+
+end pkg_generator;</DB_PACKAGE_BODY>
+  <DB_PACKAGE_ID>11053</DB_PACKAGE_ID>
+  <PROGRAM_ID>1</PROGRAM_ID>
+  <BPD_ITEMS/>
+  <COMPONENT_PACKAGES/>
+  <COMPONENT_LABELS/>
+ </DB_PACKAGES_ITEM>
+</DB_PACKAGES>
 </COMPONENTS>
