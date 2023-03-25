@@ -15,15 +15,15 @@ declare
          where cpx.component_id = pkg_audit_comp.c_autom_component_id
            and cp.name = p_comp_package;
 begin
-    for rec_rule in cur_rules_by_comp_package('PKG_GENERATOR') loop
-        dbms_output.put_line('Enabling rule ['   rec_rule.rule  ']' || pkg_str.c_lb);
+    for rec_rule in cur_rules_by_comp_package('VP - QrCode Generator') loop
+        dbms_output.put_line('Enabling rule ['  rec_rule.rule  ']' || pkg_str.c_lb);
         pkg_ruleator.compile_rule_plsql_block_and_raise(rec_rule.sql_text);
 
         update rule set is_enabled = 1 where rule_id = rec_rule.rule_id;
     end loop;
     
-    for rec_autom in cur_autom_by_comp_package('PKG_GENERATOR') loop
-        dbms_output.put_line('Enabling automation ['   rec_autom.autom_name  ']' || pkg_str.c_lb);
+    for rec_autom in cur_autom_by_comp_package('VP - QrCode Generator') loop
+        dbms_output.put_line('Enabling automation ['  rec_autom.autom_name  ']' || pkg_str.c_lb);
 
         update autom set enabled = 1 where autom_id = rec_autom.autom_id;
     end loop;
