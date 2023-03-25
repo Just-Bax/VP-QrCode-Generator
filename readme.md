@@ -1,3 +1,2 @@
-## VP-QRCODE-GENERATOR
-
-### 💻 QrCode Generator and Uploader for OneVizion system
+# VP QrCode Generator
+💻 QrCode Generator and Uploader for OneVizion system
