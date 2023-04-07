@@ -7,7 +7,7 @@ declare
          where cpx.component_id = pkg_audit_comp.c_rule_component_id
            and cp.name = p_comp_package;
 begin
-    for rec_rule in cur_rules_by_comp_package('VP - QrCode Generator') loop
+    for rec_rule in cur_rules_by_comp_package('Vp - QrCode Generator') loop
         dbms_output.put_line('Enabling rule [' ||  rec_rule.rule || ']' || pkg_str.c_lb);
         pkg_ruleator.compile_rule_plsql_block_and_raise(rec_rule.sql_text);
 
