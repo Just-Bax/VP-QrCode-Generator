@@ -8,7 +8,7 @@ declare
            and cp.name = p_comp_package;
 begin
     for rec_rule in cur_rules_by_comp_package('Vp - QrCode Generator') loop
-        dbms_output.put_line('Enabling rule ['  rec_rule.rule  ']' || pkg_str.c_lb);
+        dbms_output.put_line('Enabling rule ['  to_char(rec_rule.rule)  ']' || to_char(pkg_str.c_lb));
         pkg_ruleator.compile_rule_plsql_block_and_raise(rec_rule.sql_text);
         update rule set is_enabled = 1 where rule_id = rec_rule.rule_id;
     end loop;
