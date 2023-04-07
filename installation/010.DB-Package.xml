@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="DB-Packages.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><DB_PACKAGES>
+ <DB_PACKAGES_ITEM>
+  <DB_PKG_NAME>PKG_GENERATOR</DB_PKG_NAME>
+  <PKG_NAME>PKG_GENERATOR</PKG_NAME>
+  <DB_PACKAGE_SPEC>CREATE OR REPLACE EDITIONABLE PACKAGE &quot;PKG_GENERATOR&quot; 
+as
+
+    function get_ttid(p_tid in number)
+        return number;
+    
+    procedure qrcode_callback(
+        p_http_status in number,
+        p_response in varchar2,
+        p_tid in number,
+        p_http_call_log_id in rule_http_call_log.rule_http_call_log_id%type,
+        p_id2 in number);
+
+end pkg_generator;</DB_PACKAGE_SPEC>
+  <DB_PACKAGE_BODY>CREATE OR REPLACE EDITIONABLE PACKAGE BODY &quot;PKG_GENERATOR&quot; 
+as
+
+    function get_ttid(p_tid in number)
+        return number
+    as
+        ttid number;
+    begin
+        select xitor_type_id
+        into ttid
+        from xitor 
+        where xitor_id = p_tid;
+        
+        return ttid;
+    end;
+    
+    procedure qrcode_callback(
+        p_http_status in number,
+        p_response in varchar2,
+        p_tid in number,
+        p_http_call_log_id in rule_http_call_log.rule_http_call_log_id%type,
+        p_id2 in number)
+    as
+        ttid number;
+        qrid number;
+        blob_id number;
+    begin
+        ttid := get_ttid(p_tid);
+        
+        select config_field_id
+        into qrid
+        from config_field 
+        where xitor_type_id = ttid and config_field_name like &apos;%QRCODE%&apos;;
+    
+        insert into blob_data(blob_data, thumbnail, config_field_id, filename, key_value)
+        values (p_response, p_response, qrid, &apos;Qr-Code.jpg&apos;, p_tid)
+        returning blob_data_id INTO blob_id;
+        commit;
+        util.setvalnumbyid(p_tid, qrid, blob_id);
+    end;
+
+end pkg_generator;</DB_PACKAGE_BODY>
+  <DB_PACKAGE_ID>11053</DB_PACKAGE_ID>
+  <PROGRAM_ID>1</PROGRAM_ID>
+  <BPD_ITEMS/>
+  <COMPONENT_PACKAGES/>
+  <COMPONENT_LABELS/>
+ </DB_PACKAGES_ITEM>
+</DB_PACKAGES>
+</COMPONENTS>
