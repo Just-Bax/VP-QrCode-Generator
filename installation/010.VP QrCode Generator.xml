@@ -73,9 +73,9 @@ from xitor_type</TEMPLATE_SQL>
   <RULE_HTTPCALLS>
    <T_RULE_HTTPCALL>
     <AUTH_TYPE>1</AUTH_TYPE>
-    <CALLBACK_PROCEDURE>PKG_GENERATOR.qrcode_callback</CALLBACK_PROCEDURE>
+    <CALLBACK_PROCEDURE>PKG_QRCODE_GENERATOR.qrcode_callback</CALLBACK_PROCEDURE>
     <CUSTOM_HEADERS>Content-Type: application/json</CUSTOM_HEADERS>
-    <DATA_SQL>select &apos;{&quot;data&quot;: &quot;https://cloud-erp.onevizion.com/form/ConfigAppForm.do?id=&apos; || to_char(:xitor_id) || &apos;&amp;ttid=&apos; || to_char(PKG_GENERATOR.get_ttid(:xitor_id)) || &apos;&quot; , &quot;config&quot;: {&quot;bodyColor&quot;: &quot;#152B42&quot;, &quot;bgColor&quot;: &quot;#FFFFFF&quot;, &quot;eye1Color&quot;: &quot;#152B42&quot;, &quot;eye2Color&quot;: &quot;#152B42&quot;, &quot;eye3Color&quot;: &quot;#152B42&quot;, &quot;eyeBall1Color&quot;: &quot;#152B42&quot;, &quot;eyeBall2Color&quot;: &quot;#152B42&quot;, &quot;eyeBall3Color&quot;: &quot;#152B42&quot;, &quot;gradientColor1&quot;: &quot;#152B42&quot;, &quot;gradientColor2&quot;: &quot;#152B42&quot;}, &quot;size&quot;: 300, &quot;download&quot;: false, &quot;file&quot;: &quot;png&quot;}&apos; from dual</DATA_SQL>
+    <DATA_SQL>select &apos;{&quot;data&quot;: &quot;https://cloud-erp.onevizion.com/form/ConfigAppForm.do?id=&apos; || to_char(:xitor_id) || &apos;&amp;ttid=&apos; || to_char(PKG_QRCODE_GENERATOR.get_ttid(:xitor_id)) || &apos;&quot; , &quot;config&quot;: {&quot;bodyColor&quot;: &quot;#152B42&quot;, &quot;bgColor&quot;: &quot;#FFFFFF&quot;, &quot;eye1Color&quot;: &quot;#152B42&quot;, &quot;eye2Color&quot;: &quot;#152B42&quot;, &quot;eye3Color&quot;: &quot;#152B42&quot;, &quot;eyeBall1Color&quot;: &quot;#152B42&quot;, &quot;eyeBall2Color&quot;: &quot;#152B42&quot;, &quot;eyeBall3Color&quot;: &quot;#152B42&quot;, &quot;gradientColor1&quot;: &quot;#152B42&quot;, &quot;gradientColor2&quot;: &quot;#152B42&quot;}, &quot;size&quot;: 300, &quot;download&quot;: false, &quot;file&quot;: &quot;png&quot;}&apos; from dual</DATA_SQL>
     <MULTIPART_HEADERS>Content-Disposition: form-data; name=&quot;json_data&quot;; filename=&quot;filename.json&quot;
 Content-Type: application/json</MULTIPART_HEADERS>
     <HTTP_METHOD_ID>2</HTTP_METHOD_ID>
@@ -133,9 +133,9 @@ Content-Type: application/json</MULTIPART_HEADERS>
  </RULES_ITEM>
 </RULES><DB_PACKAGES>
  <DB_PACKAGES_ITEM>
-  <DB_PKG_NAME>PKG_GENERATOR</DB_PKG_NAME>
-  <PKG_NAME>PKG_GENERATOR</PKG_NAME>
-  <DB_PACKAGE_SPEC>CREATE OR REPLACE EDITIONABLE PACKAGE &quot;PKG_GENERATOR&quot; 
+  <DB_PKG_NAME>PKG_QRCODE_GENERATOR</DB_PKG_NAME>
+  <PKG_NAME>PKG_QRCODE_GENERATOR</PKG_NAME>
+  <DB_PACKAGE_SPEC>CREATE OR REPLACE EDITIONABLE PACKAGE &quot;PKG_QRCODE_GENERATOR&quot; 
 as
 
     function get_ttid(p_tid in number)
@@ -148,8 +148,8 @@ as
         p_http_call_log_id in rule_http_call_log.rule_http_call_log_id%type,
         p_id2 in number);
 
-end pkg_generator;</DB_PACKAGE_SPEC>
-  <DB_PACKAGE_BODY>CREATE OR REPLACE EDITIONABLE PACKAGE BODY &quot;PKG_GENERATOR&quot; 
+end pkg_qrcode_generator;</DB_PACKAGE_SPEC>
+  <DB_PACKAGE_BODY>CREATE OR REPLACE EDITIONABLE PACKAGE BODY &quot;PKG_QRCODE_GENERATOR&quot; 
 as
 
     function get_ttid(p_tid in number)
@@ -202,7 +202,7 @@ as
         util.setvalnumbyid(p_tid, qrid, blob_id);
     end;
 
-end pkg_generator;</DB_PACKAGE_BODY>
+end pkg_qrcode_generator;</DB_PACKAGE_BODY>
   <DB_PACKAGE_ID>11093</DB_PACKAGE_ID>
   <PROGRAM_ID>1</PROGRAM_ID>
   <BPD_ITEMS/>
