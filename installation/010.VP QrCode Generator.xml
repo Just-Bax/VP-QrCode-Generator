@@ -178,10 +178,10 @@ as
     begin
         ttid := get_ttid(p_tid);
         
-        select config_field_id
+        select cf.config_field_id
         into qrid
-        from config_field 
-        where xitor_type_id = ttid and cf.data_type = 15 and
+        from config_field cf
+        where cf.xitor_type_id = ttid and cf.data_type = 15 and
         ( cf.config_field_name like &apos;%QRCODE%&apos; or cf.config_field_name like &apos;%QR_CODE%&apos;) fetch first rows only;
                 
         insert into blob_data(blob_data, thumbnail, config_field_id, filename, key_value)
