@@ -181,19 +181,7 @@ as
         select config_field_id
         into qrid
         from config_field 
-        where xitor_type_id = ttid and config_field_name like &apos;%_QRCODE&apos;;
-        
-        -- if ttid = 100006865 then -- Trackor_type_id of Prescription
-        --     qrid := 1000063381; -- QrCode field
-        -- end if;
-        
-        -- if ttid = 100006823 then -- Trackor_type_id of Patient
-        --     qrid := 1000063082; -- QrCode field
-        -- end if;
-        
-        -- if ttid = 100006883 then -- Trackor_type_id of Staff
-        --     qrid := 1000063101; -- QrCode field
-        -- end if;
+        where xitor_type_id = ttid and config_field_name like &apos;%QRCODE&apos;;
                 
         insert into blob_data(blob_data, thumbnail, config_field_id, filename, key_value)
         values (p_response, p_response, qrid, &apos;Qr-Code.jpg&apos;, p_tid)
