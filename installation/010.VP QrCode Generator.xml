@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_04072023171501.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
  <RULES_ITEM>
   <IS_ASYNC>0</IS_ASYNC>
-  <IS_ENABLED>0</IS_ENABLED>
+  <IS_ENABLED>1</IS_ENABLED>
   <RULE>Qr-Code generator</RULE>
   <RULE_CLASS_ID>6</RULE_CLASS_ID>
   <RULE_ID>100006783</RULE_ID>
