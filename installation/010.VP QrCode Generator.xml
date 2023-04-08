@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_04072023171501.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
+<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="isfan" description="" name="cloud-erp.onevizion.com_BPL_04092023001757.xml" site="https&#x3a;&#x2f;&#x2f;cloud-erp.onevizion.com" ts="" ><RULES>
  <RULES_ITEM>
   <IS_ASYNC>0</IS_ASYNC>
   <IS_ENABLED>1</IS_ENABLED>
-  <RULE>Qr-Code generator</RULE>
+  <RULE>QrCode-Generator</RULE>
   <RULE_CLASS_ID>6</RULE_CLASS_ID>
-  <RULE_ID>100006783</RULE_ID>
+  <RULE_ID>100006863</RULE_ID>
   <RULE_TYPE>
    <RULE_TYPE_ID>18</RULE_TYPE_ID>
    <RULE_TYPE>After Trackor Create</RULE_TYPE>
@@ -75,7 +75,7 @@ from xitor_type</TEMPLATE_SQL>
     <AUTH_TYPE>1</AUTH_TYPE>
     <CALLBACK_PROCEDURE>PKG_QRCODE_GENERATOR.qrcode_callback</CALLBACK_PROCEDURE>
     <CUSTOM_HEADERS>Content-Type: application/json</CUSTOM_HEADERS>
-    <DATA_SQL>select &apos;{&quot;data&quot;: &quot;https://cloud-erp.onevizion.com/form/ConfigAppForm.do?id=&apos; || to_char(:xitor_id) || &apos;&amp;ttid=&apos; || to_char(PKG_QRCODE_GENERATOR.get_ttid(:xitor_id)) || &apos;&quot; , &quot;config&quot;: {&quot;bodyColor&quot;: &quot;#152B42&quot;, &quot;bgColor&quot;: &quot;#FFFFFF&quot;, &quot;eye1Color&quot;: &quot;#152B42&quot;, &quot;eye2Color&quot;: &quot;#152B42&quot;, &quot;eye3Color&quot;: &quot;#152B42&quot;, &quot;eyeBall1Color&quot;: &quot;#152B42&quot;, &quot;eyeBall2Color&quot;: &quot;#152B42&quot;, &quot;eyeBall3Color&quot;: &quot;#152B42&quot;, &quot;gradientColor1&quot;: &quot;#152B42&quot;, &quot;gradientColor2&quot;: &quot;#152B42&quot;}, &quot;size&quot;: 300, &quot;download&quot;: false, &quot;file&quot;: &quot;png&quot;}&apos; from dual</DATA_SQL>
+    <DATA_SQL>select &apos;{&quot;url&quot;: &quot;https://cloud-erp.onevizion.com/form/ConfigAppForm.do?id=&apos; || to_char(:xitor_id) || &apos;&amp;ttid=&apos; || to_char(PKG_QRCODE_GENERATOR.get_ttid(:xitor_id)) || &apos;&quot;}&apos; from dual</DATA_SQL>
     <MULTIPART_HEADERS>Content-Disposition: form-data; name=&quot;json_data&quot;; filename=&quot;filename.json&quot;
 Content-Type: application/json</MULTIPART_HEADERS>
     <HTTP_METHOD_ID>2</HTTP_METHOD_ID>
@@ -83,9 +83,9 @@ Content-Type: application/json</MULTIPART_HEADERS>
     <IS_MULTIPART_FORM_DATA_REQ>0</IS_MULTIPART_FORM_DATA_REQ>
     <PROGRAM_ID>1</PROGRAM_ID>
     <REQUEST_BODY_FORMAT>4</REQUEST_BODY_FORMAT>
-    <RULE_HTTP_CALL_ID>101363</RULE_HTTP_CALL_ID>
-    <RULE_ID>100006783</RULE_ID>
-    <URL_STR>https://api.qrcode-monkey.com/qr/custom</URL_STR>
+    <RULE_HTTP_CALL_ID>101423</RULE_HTTP_CALL_ID>
+    <RULE_ID>100006863</RULE_ID>
+    <URL_STR>https://api-bax-qrcode.onrender.com/api/make</URL_STR>
     <CONNECTION_TIMEOUT>30</CONNECTION_TIMEOUT>
     <READ_TIMEOUT>30</READ_TIMEOUT>
     <EXECUTION_ATTEMPTS>1</EXECUTION_ATTEMPTS>
@@ -94,13 +94,13 @@ Content-Type: application/json</MULTIPART_HEADERS>
   <RULE_HTTPCALL_PARAMS/>
   <BPD_ITEMS>
    <T_BPD_ITEM>
-    <ITEM_ID>10000616615</ITEM_ID>
-    <PKEY>100006783</PKEY>
+    <ITEM_ID>10000616695</ITEM_ID>
+    <PKEY>100006863</PKEY>
     <ITEM_TYPE_ID>9</ITEM_TYPE_ID>
     <ITEM_STATUS_ID>1</ITEM_STATUS_ID>
     <BLOB_DATA/>
     <PROGRAM_ID>1</PROGRAM_ID>
-    <NAME>Qr-Code generator</NAME>
+    <NAME>QrCode-Generator</NAME>
     <APP_LABEL/>
    </T_BPD_ITEM>
   </BPD_ITEMS>
@@ -112,8 +112,8 @@ Content-Type: application/json</MULTIPART_HEADERS>
   <COMPONENT_PACKAGES>
    <T_BPL_COMP_PKG>
     <COMPONENT_ID>4</COMPONENT_ID>
-    <OBJECT_ID>100006783</OBJECT_ID>
-    <COMPONENTS_PACKAGE_ID>101303</COMPONENTS_PACKAGE_ID>
+    <OBJECT_ID>100006863</OBJECT_ID>
+    <COMPONENTS_PACKAGE_ID>101305</COMPONENTS_PACKAGE_ID>
     <NAME>Vp - QrCode Generator</NAME>
     <PROGRAM_ID>1</PROGRAM_ID>
     <BPD_ITEMS/>
@@ -123,7 +123,11 @@ Content-Type: application/json</MULTIPART_HEADERS>
   <CONFIG_FIELD_IDNUMS/>
   <TASK_DATE_IDNUMS/>
   <TASK_IDNUMS/>
-  <TRACKOR_TYPE_IDNUMS/>
+  <TRACKOR_TYPE_IDNUMS>
+   <VARCHAR2>PATIENT</VARCHAR2>
+   <VARCHAR2>PRESCRIPTION</VARCHAR2>
+   <VARCHAR2>STAFF</VARCHAR2>
+  </TRACKOR_TYPE_IDNUMS>
   <RELATION_TYPE_IDNUMS/>
   <WP_TEMPLATE_IDNUMS/>
   <WF_TEMPLATE_IDNUMS/>
@@ -192,14 +196,14 @@ as
     end;
 
 end pkg_qrcode_generator;</DB_PACKAGE_BODY>
-  <DB_PACKAGE_ID>11093</DB_PACKAGE_ID>
+  <DB_PACKAGE_ID>11107</DB_PACKAGE_ID>
   <PROGRAM_ID>1</PROGRAM_ID>
   <BPD_ITEMS/>
   <COMPONENT_PACKAGES>
    <T_BPL_COMP_PKG>
     <COMPONENT_ID>27</COMPONENT_ID>
-    <OBJECT_ID>11093</OBJECT_ID>
-    <COMPONENTS_PACKAGE_ID>101303</COMPONENTS_PACKAGE_ID>
+    <OBJECT_ID>11107</OBJECT_ID>
+    <COMPONENTS_PACKAGE_ID>101305</COMPONENTS_PACKAGE_ID>
     <NAME>Vp - QrCode Generator</NAME>
     <PROGRAM_ID>1</PROGRAM_ID>
     <BPD_ITEMS/>
