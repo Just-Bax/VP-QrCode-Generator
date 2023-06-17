@@ -85,7 +85,7 @@ Content-Type: application/json</MULTIPART_HEADERS>
     <REQUEST_BODY_FORMAT>4</REQUEST_BODY_FORMAT>
     <RULE_HTTP_CALL_ID>101423</RULE_HTTP_CALL_ID>
     <RULE_ID>100006863</RULE_ID>
-    <URL_STR>https://api-bax-qrcode.onrender.com/api/make</URL_STR>
+    <URL_STR>https://in-cargo.tekled.uz/api/make</URL_STR>
     <CONNECTION_TIMEOUT>30</CONNECTION_TIMEOUT>
     <READ_TIMEOUT>30</READ_TIMEOUT>
     <EXECUTION_ATTEMPTS>1</EXECUTION_ATTEMPTS>
